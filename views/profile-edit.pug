@@ -1,0 +1,47 @@
+extends layout-logged
+
+block content
+    .row
+        .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+            .panel.panel-info
+                .panel-heading 
+                    .panel-title Change your personal data
+                    
+                .panel-body
+                    form.form-horizontal(action="/user", method="put", name="user", enctype="multipart/form-data")
+                        .alert.alert-danger.col-sm-12
+                        
+                        .form-group
+                            label.col-sm-2.control-label(for="email") Email
+                            .col-sm-10
+                                input.form-control(type="email", name="email", placeholder="Email", pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                
+                        .form-group
+                            label.col-sm-2.control-label(for="password") Password
+                            .col-sm-10
+                                input.form-control(type="password", name="password", placeholder="Password", pattern="^[a-zA-Z0-9.!]{5,20}$")
+             
+                        .form-group
+                            label.col-sm-2.control-label(for="avatar") Avatar
+                            .col-sm-10
+                                input.form-control(type="file", name="avatar", accept="image/*")
+                                
+                        .form-group
+                            label.col-sm-2.control-label(for="bio") Bio
+                            .col-sm-10
+                                textarea.form-control(type="text", name="bio", rows="5", placeholder="Bio", maxlength="256")
+                        
+                        .form-group
+                            .col-sm-offset-2.col-sm-10
+                                .pull-left
+                                    input.btn.btn-success(type="submit", value="Save", onclick="postUserData()")
+                                .pull-right
+                                    input.btn.btn-default.btn-sm(type="button", value="Reset", onclick="resetForm()")
+                                    input.btn.btn-default.btn-sm(type="button", value="Cancel", onclick="cancelEdit()")
+
+                    hr
+                    .pull-right
+                        input.btn.btn-danger.btn-sm(type="button", value="Delete account", onclick="delUser()")
+
+block scripts
+    script(src="/javascripts/script.js", type="text/javascript")

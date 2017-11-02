@@ -1,0 +1,49 @@
+$darkgray: #888
+$blue: #069
+
+body
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+
+a
+  color: $blue
+
+.navbar
+    .navbar-brand::first-letter
+        text-transform: uppercase;
+
+.alert
+    display: none
+
+
+input:invalid
+    border-color: #900;
+    background-color: #FDD;
+
+input:focus:invalid
+    outline: none;
+
+.panel-link
+    float: right 
+    font-size: 80%
+    position: relative
+    top: -12px
+
+    input
+        font-size: 95%
+        margin: 0
+        padding: 0
+
+.loginbox
+    margin-top: 50px
+    
+    hr
+        border-top: 1px solid $darkgray
+
+.profile-panel
+    .center-block
+        text-align: center;
+
+    img
+        margin: 10px auto
+        max-width: 128px
+        max-heght: 128px

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    .row
+        .loginbox.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+            .panel.panel-info
+                .panel-heading
+                    .panel-title Reset password
+                .panel-body
+                    form(action="/user/reset/password", method="post", name="user", enctype="multipart/form-data")
+                        .alert.col-sm-12
+                        
+                        .form-group.input-group
+                            span.input-group-addon
+                                i.glyphicon.glyphicon-user
+                            input.form-control(type="text", name="email", placeholder='email',
+                                required, pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+
+                        .form-group
+                            input.btn.btn-success.btn-block(type="submit", value="Send", onclick="sendResetPasswordRequest()")
+                    
+                    hr
+                    p   Go back to 
+                        a(href="/login") Login page
+
+
+block scripts
+    script(src="/javascripts/script.js", type="text/javascript")

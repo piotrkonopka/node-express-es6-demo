@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/styles/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body(onload="loadData()")
+    nav.navbar.navbar-default
+        .container-fluid
+            p.navbar-brand(name='page-title')
+            p.navbar-text.navbar-right Logged as 
+                a.navbar-link(href="", name='user-name')
+                span |
+                input.btn-link(type="button", value="Logout", onclick="logout()")
+    .container
+        block content
+        block scripts
