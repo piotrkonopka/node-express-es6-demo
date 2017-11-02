@@ -1,5 +1,7 @@
 $darkgray: #888
 $blue: #069
+$red: #C00
+$pink: #FEE
 
 body
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
@@ -9,18 +11,17 @@ a
 
 .navbar
     .navbar-brand::first-letter
-        text-transform: uppercase;
+        text-transform: uppercase
 
 .alert
     display: none
 
-
 input:invalid
-    border-color: #900;
-    background-color: #FDD;
+    border: 1px solid $red
+    background-color: $pink
 
 input:focus:invalid
-    outline: none;
+    outline: none
 
 .panel-link
     float: right 
@@ -41,7 +42,7 @@ input:focus:invalid
 
 .profile-panel
     .center-block
-        text-align: center;
+        text-align: center
 
     img
         margin: 10px auto

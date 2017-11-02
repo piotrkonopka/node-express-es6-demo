@@ -11,8 +11,8 @@ a {
   display: none; }
 
 input:invalid {
-  border-color: #900;
-  background-color: #FDD; }
+  border: 1px solid #C00;
+  background-color: #FEE; }
 
 input:focus:invalid {
   outline: none; }
