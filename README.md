@@ -4,10 +4,10 @@
 
 The project consists of progressive phases.
 
-Task 1: Local authentication with Passport.js and JSON Web Tokens - done
-Task 2: Profile edit page, uploading avatar's image, deleting account - done
-Task 3: Recaptha verification on sign up
-Task 4: Password reset feature with Nodemailer support
+Task 1: Local authentication with Passport.js and JSON Web Tokens - done 
+Task 2: Profile edit page, uploading avatar's image, deleting account - done 
+Task 3: Recaptcha verification on sign up 
+Task 4: Password reset feature with Nodemailer support 
 ...
 
 # Getting started
