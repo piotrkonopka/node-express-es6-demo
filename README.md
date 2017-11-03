@@ -4,11 +4,11 @@
 
 The project consists of progressive phases.
 
-Task 1: Local authentication with Passport.js and JSON Web Tokens - done 
-Task 2: Profile edit page, uploading avatar's image, deleting account - done 
-Task 3: Recaptcha verification on sign up 
-Task 4: Password reset feature with Nodemailer support 
-...
+Task 1: Local authentication with Passport.js and JSON Web Tokens - done  
+Task 2: Profile edit page, uploading avatar's image, deleting account - done  
+Task 3: Recaptcha verification on sign up - done  
+Task 4: Password reset feature with Nodemailer support  
+...  
 
 # Getting started
 
@@ -26,6 +26,7 @@ To get the server running locally:
 
 - [express] (https://github.com/expressjs/express) - The heart of this app, fast & furious way to handle routing, and all other backend stuff 
 - [express-jwt] (https://github.com/auth0/express-jwt) - Middleware for JWT validation
+- [express-recaptcha] (https://github.com/pdupavillon/express-recaptcha) - Google recaptcha middleware for express
 - [passport] (https://github.com/jaredhanson/passport) - Authentication middleware
 - [mongoose] (https://github.com/Automattic/mongoose) - For asynchronous work with MongoDB
 - [mongoose-unique-validator] (https://github.com/blakehaswell/mongoose-unique-validator) - Mongoose plugin for handling validations in fields within a Mongoose schema
@@ -44,3 +45,15 @@ To get the server running locally:
 - `routes/` - Routes
 - `views/` - Pug templates
 - `app.js` - The entry point to the application and server error handling
+
+## Additional remarks
+
+To get reCAPTCHA to work, you need to sign up for an API key pair for your site. 
+The key pair consists of a site key and secret key. 
+Then create a file `config/recaptcha.js` with the following content:  
+`
+module.exports = { 
+    SITE_KEY: 'YOUR_SITE_KEY', 
+    SECRET_KEY: 'YOUR_SECRET_KEY' 
+};
+`

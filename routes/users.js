@@ -3,6 +3,7 @@ const router = require('express').Router(),
     passport = require('passport'),
     User = mongoose.model('User'),
     path = require('path'),
+    
     multer = require('multer'),
     storage = multer.diskStorage({
         destination: (req, file, callback) => {
@@ -13,22 +14,27 @@ const router = require('express').Router(),
         }
     }),
     upload = multer({
-            storage: storage,
-            limits: {
-                fileSize: 10240
-            },
-            fileFilter: (req, file, callback) => {
-                if(file.mimetype !== 'image/jpeg') {
-                    return callback(null, false);
-                }
-                
-                callback(null, true);
+        storage: storage,
+        limits: {
+            fileSize: 10240
+        },
+        fileFilter: (req, file, callback) => {
+            if(file.mimetype !== 'image/jpeg') {
+                return callback(null, false);
             }
-        }),
+
+            callback(null, true);
+        }
+    }),
+                
     returnError = require('../config').returnError,
     logout = require('../config').logout,
-    auth = require('../config/auth');
-
+    auth = require('../config/auth'),
+    
+    Recaptcha = require('express-recaptcha'),
+    SITE_KEY = require('../config/recaptcha').SITE_KEY,
+    SECRET_KEY = require('../config/recaptcha').SECRET_KEY,
+    recaptcha = new Recaptcha(SITE_KEY, SECRET_KEY);
 
 router.get('/', (req, res, next) => {
     return res.redirect('/login');
@@ -38,8 +44,8 @@ router.get('/login', (req, res, next) => {
     return res.render('login');
 });
 
-router.get('/signup', (req, res, next) => {
-    return res.render('signup');
+router.get('/signup', recaptcha.middleware.render, (req, res, next) => {
+    return res.render('signup', { captcha:res.recaptcha });
 });
 
 router.get('/profile', auth.required, (req, res, next) => {
@@ -114,11 +120,15 @@ router.post('/user/login', upload.fields([
     })(req, res, next);
 });
 
-router.post('/user/signup', upload.fields([
+router.post('/user/signup', 
+            upload.fields([
                 {name: 'email'},
                 {name: 'password'},
-                {name: 'username'}
-            ]),(req, res, next) => {
+                {name: 'username'},
+                {name: 'g-recaptcha-response'}
+            ]),
+            recaptcha.middleware.verify,
+            (req, res, next) => {
     if (!req.body.username) {
         return returnError(res, 'username');
     }
@@ -129,6 +139,10 @@ router.post('/user/signup', upload.fields([
 
     if (!req.body.password) {
         return returnError(res, 'password');
+    }
+    
+    if (req.recaptcha.error) {
+        return returnError(res, 'recaptcha', req.recaptcha.error);
     }
 
     let user = new User();

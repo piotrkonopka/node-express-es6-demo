@@ -19,6 +19,7 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-jwt": "3.3.0",
+    "express-recaptcha": "^3.0.0",
     "express-session": "1.15.6",
     "jsonwebtoken": "7.1.9",
     "method-override": "2.3.10",

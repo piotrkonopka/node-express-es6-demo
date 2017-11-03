@@ -106,6 +106,14 @@ let showAlert = (xhttp) => {
     
 };
 
+let customAlert = (message) => {
+    let alert = document.getElementsByClassName('alert')[0];
+    
+    alert.innerHTML = message;
+    alert.className = 'alert col-sm-12 alert-danger';
+    alert.style.display = 'inline';
+};
+
 let succesResponse = (xhttp) => {
     let response = JSON.parse(xhttp.responseText);
     
@@ -184,6 +192,12 @@ let makeRequest = (method, destination) => {
     
     if(validAvatar) {
         fd.append('avatar', uploadedAvatar);
+    }
+    
+    if(isDefined(form.elements['g-recaptcha-response']) && form.elements['g-recaptcha-response'].value !== '') {
+        fd.append('g-recaptcha-response', form.elements['g-recaptcha-response'].value);
+    } else {
+        return customAlert('You forgot about reCAPTCHA');
     }
     
     xhttp.send(fd);

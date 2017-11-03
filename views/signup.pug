@@ -28,6 +28,9 @@ block content
                                 required, pattern="^[a-zA-Z0-9.!]{5,20}$")
                                 
                         .form-group
+                            p !{captcha}
+                        
+                        .form-group
                             input.btn.btn-success.btn-block(type="submit", value="Sign up", onclick="postSignUpData()")
                     
                     hr
