@@ -17,6 +17,7 @@ To get the server running locally:
 - Clone this repo
 - `npm install` to install all required dependencies
 - Install MongoDB Community Edition ([instructions](https://docs.mongodb.com/manual/installation/#tutorials))
+- Get Google recaptcha API keys ([reCAPTCHA](https://www.google.com/recaptcha))
 - `mongod` to start daemon process for the MongoDB system
 - `npm run-script dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 
