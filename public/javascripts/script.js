@@ -194,11 +194,13 @@ let makeRequest = (method, destination) => {
         fd.append('avatar', uploadedAvatar);
     }
     
-    if(isDefined(form.elements['g-recaptcha-response']) && form.elements['g-recaptcha-response'].value !== '') {
-        fd.append('g-recaptcha-response', form.elements['g-recaptcha-response'].value);
-    } else {
-        return customAlert('You forgot about reCAPTCHA');
-    }
+    if(isDefined(form.elements['g-recaptcha-response'])) {
+        if(form.elements['g-recaptcha-response'].value !== '') {
+            fd.append('g-recaptcha-response', form.elements['g-recaptcha-response'].value);
+        } else {
+            return customAlert('You forgot about reCAPTCHA');
+        }
+    } 
     
     xhttp.send(fd);
 };
