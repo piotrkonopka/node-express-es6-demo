@@ -338,3 +338,7 @@ let cancelEdit = () => {
 let postUserData = () => {
     makeRequest('PUT', '/user');
 };
+
+let postNewPassword = () => {
+    makeRequest('PUT', window.location.pathname);
+};

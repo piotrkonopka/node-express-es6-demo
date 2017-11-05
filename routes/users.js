@@ -3,6 +3,7 @@ const router = require('express').Router(),
     passport = require('passport'),
     User = mongoose.model('User'),
     path = require('path'),
+    crypto = require('crypto'),
     
     multer = require('multer'),
     storage = multer.diskStorage({
@@ -30,6 +31,7 @@ const router = require('express').Router(),
     returnError = require('../config').returnError,
     logout = require('../config').logout,
     auth = require('../config/auth'),
+    mailer = require('../config/mailer'),
     
     Recaptcha = require('express-recaptcha'),
     SITE_KEY = require('../config/recaptcha').SITE_KEY,
@@ -163,9 +165,80 @@ router.get('/login-help', (req, res, next) => {
 router.post('/user/reset/password', upload.fields([{name: 'email'}]), (req, res, next) => {
     if (!req.body.email) {
         return returnError(res, 'email');
-    }
+    } 
+    
+    User.findOne({email: req.body.email}).then((user) => {
+        if(user) {
+            let hash = crypto.randomBytes(16).toString('hex');
+            user.resethash = hash;
+            
+            return user.save().then(() => {
+                let email = mailer.sendEmail({
+                    host: req.headers.host,
+                    email: req.body.email, 
+                    username: user.username,
+                    hash
+                });
+                
+                email.then((info) => {
+                    return res.json({messages: {success: 'email was sent'}});
+                }).catch((err) => {
+                    return returnError(res, 'email', 'can\'t be send');
+                });
+                
+            });
+            
+        } else {
+            return returnError(res, 'email', 'not found');
+        }
+    });
+});
 
-    return res.json({messages: {success: 'email was sent'}});
+router.get('/user/reset/password/:hash/:username', (req, res, next) => {
+    if (!req.params.hash) {
+        return res.redirect('/');
+    }
+    
+    if (!req.params.username) {
+        return res.redirect('/');
+    }
+    
+    User.findOne({resethash: req.params.hash, username: req.params.username}).then((user) => {
+        if(user) {
+            return res.render('reset-password');
+            
+        } else {
+            return res.redirect('/login');
+        }
+    });
+});
+
+router.put('/user/reset/password/:hash/:username', upload.fields([{name: 'password'}]), (req, res, next) => {
+    if (!req.params.hash) {
+        return returnError(res, 'error', 'the operation is not authorized');
+    }
+    
+    if (!req.params.username) {
+        return returnError(res, 'error', 'the operation is not authorized');
+    }
+    
+    if (!req.body.password) {
+        return returnError(res, 'password');
+    } 
+    
+    User.findOne({resethash: req.params.hash, username: req.params.username}).then((user) => {
+        if(user) {
+            user.resethash = undefined;
+            user.setPassword(req.body.password);
+                    
+            return user.save().then(() => {
+                return res.json({messages: {success: 'password was successfully changed'}});
+            });
+            
+        } else {
+            return returnError(res, 'error', 'the user does not exist');
+        }
+    });
 });
 
 router.post('/user/del', auth.required, (req, res, next) => {

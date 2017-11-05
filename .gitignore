@@ -31,3 +31,9 @@ npm-debug.log
 
 # Uploaded images
 public/images/uploads/*.jpg
+
+# Recaptcha keys
+config/recaptcha.js
+
+# Personal email configuration
+config/email-config.js

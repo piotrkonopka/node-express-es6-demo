@@ -7,7 +7,7 @@ The project consists of progressive phases.
 Task 1: Local authentication with Passport.js and JSON Web Tokens - done  
 Task 2: Profile edit page, uploading avatar's image, deleting account - done  
 Task 3: Recaptcha verification on sign up - done  
-Task 4: Password reset feature with Nodemailer support  
+Task 4: Password reset feature with Nodemailer support - done  
 ...  
 
 # Getting started
@@ -25,17 +25,18 @@ To get the server running locally:
 
 ## Dependencies
 
-- [express] (https://github.com/expressjs/express) - The heart of this app, fast & furious way to handle routing, and all other backend stuff 
-- [express-jwt] (https://github.com/auth0/express-jwt) - Middleware for JWT validation
-- [express-recaptcha] (https://github.com/pdupavillon/express-recaptcha) - Google recaptcha middleware for express
-- [passport] (https://github.com/jaredhanson/passport) - Authentication middleware
-- [mongoose] (https://github.com/Automattic/mongoose) - For asynchronous work with MongoDB
-- [mongoose-unique-validator] (https://github.com/blakehaswell/mongoose-unique-validator) - Mongoose plugin for handling validations in fields within a Mongoose schema
-- [multer] (https://github.com/expressjs/multer) - Middleware for handling `multipart/form-data` and uploaded files.
-- [nodemon] (https://github.com/remy/nodemon) - Node.js watcher for automatic application's restarts
-- [node-sass-middleware] (https://github.com/sass/node-sass-middleware) - Middleware for SASS
-- [pug] (https://github.com/pugjs/pug) - Template engine for building views
-- [bootstrap] (https://github.com/twbs/bootstrap) - Base for custom frontend styling
+- [express](https://github.com/expressjs/express) - The heart of this app, fast & furious way to handle routing, and all other backend stuff 
+- [express-jwt](https://github.com/auth0/express-jwt) - Middleware for JWT validation
+- [express-recaptcha](https://github.com/pdupavillon/express-recaptcha) - Google recaptcha middleware for express
+- [passport](https://github.com/jaredhanson/passport) - Authentication middleware
+- [mongoose](https://github.com/Automattic/mongoose) - For asynchronous work with MongoDB
+- [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator) - Mongoose plugin for handling validations in fields within a Mongoose schema
+- [multer](https://github.com/expressjs/multer) - Middleware for handling `multipart/form-data` and uploaded files.
+- [nodemon](https://github.com/remy/nodemon) - Node.js watcher for automatic application's restarts
+- [nodemailer](https://github.com/nodemailer/nodemailer) - Node's module for email delivery
+- [node-sass-middleware](https://github.com/sass/node-sass-middleware) - Middleware for SASS
+- [pug](https://github.com/pugjs/pug) - Template engine for building views
+- [bootstrap](https://github.com/twbs/bootstrap) - Base for custom frontend styling
 
 ## Application Structure
 
@@ -52,9 +53,31 @@ To get the server running locally:
 To get reCAPTCHA to work, you need to sign up for an API key pair for your site. 
 The key pair consists of a site key and secret key. 
 Then create a file `config/recaptcha.js` with the following content:  
-`
+```
 module.exports = { 
     SITE_KEY: 'YOUR_SITE_KEY', 
     SECRET_KEY: 'YOUR_SECRET_KEY' 
 };
-`
+```  
+
+Nodemailer need personalization. Go to `config/mailer.js` nad 
+customize the configuration for your personal mail account. You can read about 
+[smtp](https://nodemailer.com/smtp/) and [message](https://nodemailer.com/message/) 
+configuration on Nodemailer official website.  
+
+For basic configuration you must set:  
+```
+let smtpConfig = {  
+    host: 'hostname or IP address to connect to',  
+    auth: {  
+        user: 'email username',  
+        pass: 'email password'  
+    }  
+};  
+```  
+and  
+```
+let mailOptions = {  
+    from: 'The email address of the sender'  
+};  
+```
