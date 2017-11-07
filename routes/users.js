@@ -2,7 +2,6 @@ const router = require('express').Router(),
     mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
-    path = require('path'),
     crypto = require('crypto'),
     
     multer = require('multer'),

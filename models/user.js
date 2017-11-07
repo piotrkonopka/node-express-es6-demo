@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         unique: true,
-        required: [true, "can't be blank"],
+        required: [true, 'can\'t be blank'],
         match: [/^[a-zA-Z0-9]{3,20}$/, 'is invalid'],
         index: true
     },
@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         unique: true,
-        required: [true, "can't be blank"],
+        required: [true, 'can\'t be blank'],
         match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'is invalid'],
         index: true
     },
@@ -35,12 +35,12 @@ class UserClass {
     validPassword(password) {
         let hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
         return this.hash === hash;
-    };
+    }
 
     setPassword(password) {
         this.salt = crypto.randomBytes(16).toString('hex');
         this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
-    };
+    }
     
     generateJWT() {
         let today = new Date();
@@ -52,7 +52,7 @@ class UserClass {
             username: this.username,
             exp: parseInt(exp.getTime() / 1000)
         }, secret);
-    };
+    }
 
     toAuthJSON() {
         return {
@@ -62,7 +62,7 @@ class UserClass {
             bio: this.bio,
             image: this.image
         };
-    };
+    }
 }
 
 UserSchema.loadClass(UserClass);
