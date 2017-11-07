@@ -8,9 +8,10 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint app.js bin/www config models public routes --color",
     "lint-fix": "npm run lint -- --fix",
-    "saas-lint": "sass-lint -c sass-lint.yml -v -q",
+    "saas-lint": "node_modules/.bin/sass-lint -c sass-lint.yml -v -q",
+    "pug-lint": "node_modules/.bin/pug-lint -c pug-lintrc.js views",
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -42,6 +43,8 @@
   "devDependencies": {
     "eslint": "^4.10.0",
     "nodemon": "^1.11.0",
+    "pug-lint": "^2.5.0",
+    "pug-lint-config-clock": "^2.0.0",
     "sass-lint": "^1.12.1"
   },
   "keywords": [
