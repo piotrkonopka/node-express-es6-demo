@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint app.js bin/www config models public routes --color",
     "lint-fix": "npm run lint -- --fix",
+    "saas-lint": "sass-lint -c sass-lint.yml -v -q",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
   },
@@ -40,7 +41,8 @@
   },
   "devDependencies": {
     "eslint": "^4.10.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "sass-lint": "^1.12.1"
   },
   "keywords": [
     "express",

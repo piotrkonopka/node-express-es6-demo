@@ -1,5 +1,5 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif; }
 
 a {
   color: #069; }
@@ -11,8 +11,8 @@ a {
   display: none; }
 
 input:invalid {
-  border: 1px solid #C00;
-  background-color: #FEE; }
+  background-color: #fee;
+  border: 1px solid #c00; }
 
 input:focus:invalid {
   outline: none; }
@@ -37,7 +37,7 @@ input:focus:invalid {
 
 .profile-panel img {
   margin: 10px auto;
-  max-width: 128px;
-  max-heght: 128px; }
+  max-height: 128px;
+  max-width: 128px; }
 
 /*# sourceMappingURL=style.css.map */
