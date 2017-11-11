@@ -1,0 +1,27 @@
+extends layout-logged
+
+block content
+    .row
+        .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+            .panel.panel-info
+                .panel-heading 
+                    .panel-title 
+                        span.glyphicon.glyphicon-comment  
+                        |  Chat
+                        .pull-right
+                            #usersCounter
+
+                .panel-body.chat-box
+                    ul#messages.media-list
+
+                .panel-footer
+                    form(action="")
+                        .form-group.input-group
+                            input#input.form-control(type="text", placeholder="Type something...", maxlength="256")
+                            .input-group-btn
+                                input#send.btn.btn-success(type="button", value="Send", onclick="chat.sendMessage()")
+
+block scripts
+    script(src="/javascripts/script.js", type="text/javascript")
+    script(src="/socket.io-client/socket.io.js", type="text/javascript")
+    script(src="/javascripts/chat.js", type="text/javascript")

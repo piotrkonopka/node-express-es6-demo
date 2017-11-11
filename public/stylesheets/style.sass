@@ -3,6 +3,11 @@ $blue: #069
 $red: #c00
 $pink: #fee
 
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
 body
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif
 
@@ -48,3 +53,21 @@ input:focus:invalid
         margin: 10px auto
         max-height: 128px
         max-width: 128px
+
+.chat-box
+    height: 300px
+    overflow-y: scroll
+
+    img
+        margin: 1px auto
+        max-height: 32px
+        max-width: 32px
+
+    .media-heading
+        overflow: auto
+
+    .media-body
+        max-width: 460px
+
+    hr
+        margin: 10px auto

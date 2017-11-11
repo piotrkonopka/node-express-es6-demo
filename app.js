@@ -32,6 +32,8 @@ app.use(sassMiddleware({
 }));  
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/styles', express.static(__dirname + '/node_modules/bootstrap/dist/'));
+app.use('/socket.io-client', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
+app.use('/socket.io', express.static(__dirname + '/node_modules/socket.io/lib/'));
 
 app.use(session({
     secret: secret,
@@ -49,6 +51,7 @@ require('./models/user');
 require('./config/passport');
 
 app.use('/', require('./routes/users'));
+app.use('/chat', require('./routes/chat'));
 
 app.use((req, res, next) => {
     let err = new Error('Not Found');

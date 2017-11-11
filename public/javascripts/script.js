@@ -75,7 +75,7 @@ let login = (xhttp) => {
     
     if (isDefined(response.user.token)) {
         sessionStorage.userToken = response.user.token;
-        window.location.href = `/profile?token=${sessionStorage.userToken}`;
+        window.location.href = `/chat?token=${sessionStorage.userToken}`;
         
     } else {
         console.error('Something went wrong. No token - no access, sorry.');
@@ -284,6 +284,13 @@ let loadData = () => {
 
             let pageTitle = document.getElementsByName('page-title')[0];
             pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
+            
+            let chatLink = document.getElementsByName('chat-link')[0];
+            if (isDefined(sessionStorage.userToken)) {
+                chatLink.href = `/chat?token=${sessionStorage.userToken}`;
+            } else {
+                window.location.href = '/login';
+            }
 
         } else if (window.location.pathname === '/profile/edit') {
             let pageTitle = document.getElementsByName('page-title')[0];
@@ -297,7 +304,26 @@ let loadData = () => {
                 window.location.href = '/login';
             }
             
+            let chatLink = document.getElementsByName('chat-link')[0];
+            if (isDefined(sessionStorage.userToken)) {
+                chatLink.href = `/chat?token=${sessionStorage.userToken}`;
+            } else {
+                window.location.href = '/login';
+            }
+            
             resetForm();
+            
+        } else if (window.location.pathname === '/chat') {
+            let pageTitle = document.getElementsByName('page-title')[0];
+            pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
+
+            let userName = document.getElementsByName('user-name')[0];
+            if (isDefined(sessionStorage.username)) {
+                userName.innerHTML = `${sessionStorage.username} `;
+                userName.href = `/profile?token=${sessionStorage.userToken}`;
+            } else {
+                window.location.href = '/login';
+            }
         }
     }
 };

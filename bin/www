@@ -52,7 +52,52 @@ let onListening = () => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const server = http.createServer(app);
+const server = http.createServer(app),
+    io = require('socket.io').listen(server);
+
+let loggedUsers = 0;
+
+io.on('connection', (socket) => {
+    let userLogged = false;
+
+    socket.on('disconnect', () => {
+        if (userLogged) {
+            --loggedUsers;
+
+            socket.broadcast.emit('user left', {
+                username: socket.username,
+                loggedUsers: loggedUsers
+            });
+        }
+    });
+
+    socket.on('new message', (data) => {
+        socket.broadcast.emit('new message', {
+            user: { username: socket.username, avatar: data.avatar },
+            message: data.message,
+            date: new Date().toUTCString()
+        });
+    });
+
+    socket.on('add user', (username) => {
+        if (userLogged) {
+            return; 
+        }
+
+        socket.username = username;
+        ++loggedUsers;
+        userLogged = true;
+        
+        socket.emit('login', {
+            loggedUsers: loggedUsers
+        });
+        
+        socket.broadcast.emit('user joined', {
+            username: socket.username,
+            loggedUsers: loggedUsers
+        });
+    });
+});
 
 server.listen(port);
 server.on('error', onError);

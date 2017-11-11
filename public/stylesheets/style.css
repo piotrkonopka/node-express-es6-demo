@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
 body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif; }
 
@@ -39,5 +44,19 @@ input:focus:invalid {
   margin: 10px auto;
   max-height: 128px;
   max-width: 128px; }
+
+.chat-box {
+  height: 300px;
+  overflow-y: scroll; }
+  .chat-box img {
+    margin: 1px auto;
+    max-height: 32px;
+    max-width: 32px; }
+  .chat-box .media-heading {
+    overflow: auto; }
+  .chat-box .media-body {
+    max-width: 460px; }
+  .chat-box hr {
+    margin: 10px auto; }
 
 /*# sourceMappingURL=style.css.map */
