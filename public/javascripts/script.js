@@ -253,74 +253,75 @@ let loadData = () => {
     if(isDefined(Storage)) {
         if(window.location.pathname === '/profile') {
             let username = document.getElementById('username');
-            let userName = document.getElementsByName('user-name')[0];
-            if (isDefined(sessionStorage.username)) {
-                username.innerHTML = sessionStorage.username;
-                userName.innerHTML = `${sessionStorage.username} `;
-            } else {
-                window.location.href = '/login';
-            }
-
             let userEmail = document.getElementById('userEmail');
-            if (isDefined(sessionStorage.userEmail)) {
-                userEmail.innerHTML = sessionStorage.userEmail;
-            } else {
-                window.location.href = '/login';
-            }
-
             let userBio = document.getElementById('userBio');
-            if (isDefined(sessionStorage.userBio)) {
-                userBio.innerHTML = sessionStorage.userBio;
-            } else {
-                userBio.innerHTML = '>>Top Secret<<';
-            }
-
             let userImage = document.getElementById('userImage');
-            if (isDefined(sessionStorage.userImage)) {
-                userImage.src = `../images/uploads/${sessionStorage.userImage}`;
-            } else {
-                userImage.src = '../images/Default-avatar.jpg';
-            }
-
-            let pageTitle = document.getElementsByName('page-title')[0];
-            pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
             
+            let pageTitle = document.getElementsByName('page-title')[0];
             let chatLink = document.getElementsByName('chat-link')[0];
-            if (isDefined(sessionStorage.userToken)) {
+            let myUsername = document.getElementsByName('my-username')[0];
+            
+            let editProfileBtn = document.getElementsByName('edit-profile-btn')[0];
+            
+            if(isDefined(sessionStorage.userToken)) {
+                if(isDefined(_userData.username)) {
+                    username.innerHTML = _userData.username;
+                    userEmail.innerHTML = _userData.email;
+                    userBio.innerHTML = _userData.bio || '>>Top Secret<<';
+                    userImage.src = _userData.image 
+                        ? `../images/uploads/${_userData.image}`
+                        : '../images/Default-avatar.jpg';
+
+                    if(_userData.username === sessionStorage.username) {
+                        editProfileBtn.style.visibility = 'visible';
+                    }
+
+                } else {
+                    username.innerHTML = sessionStorage.username;
+                    userEmail.innerHTML = sessionStorage.userEmail;
+                    userBio.innerHTML = sessionStorage.userBio || '>>Top Secret<<';
+                    userImage.src = sessionStorage.userImage 
+                        ? `../images/uploads/${sessionStorage.userImage}`
+                        : '../images/Default-avatar.jpg';
+
+                    editProfileBtn.style.visibility = 'visible';
+                }
+            
+                pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
                 chatLink.href = `/chat?token=${sessionStorage.userToken}`;
+                myUsername.innerHTML = `${sessionStorage.username} `;
+                myUsername.href = `/profile?token=${sessionStorage.userToken}`;
+                
             } else {
                 window.location.href = '/login';
             }
 
         } else if (window.location.pathname === '/profile/edit') {
             let pageTitle = document.getElementsByName('page-title')[0];
-            pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
-
-            let userName = document.getElementsByName('user-name')[0];
-            if (isDefined(sessionStorage.username)) {
-                userName.innerHTML = `${sessionStorage.username} `;
-                userName.href = `/profile?token=${sessionStorage.userToken}`;
-            } else {
-                window.location.href = '/login';
-            }
-            
+            let myUsername = document.getElementsByName('my-username')[0];
             let chatLink = document.getElementsByName('chat-link')[0];
+            
             if (isDefined(sessionStorage.userToken)) {
+                pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
                 chatLink.href = `/chat?token=${sessionStorage.userToken}`;
+                myUsername.innerHTML = `${sessionStorage.username} `;
+                myUsername.href = `/profile?token=${sessionStorage.userToken}`;
+                
+                resetForm();
+                
             } else {
                 window.location.href = '/login';
             }
-            
-            resetForm();
             
         } else if (window.location.pathname === '/chat') {
             let pageTitle = document.getElementsByName('page-title')[0];
-            pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
-
-            let userName = document.getElementsByName('user-name')[0];
-            if (isDefined(sessionStorage.username)) {
-                userName.innerHTML = `${sessionStorage.username} `;
-                userName.href = `/profile?token=${sessionStorage.userToken}`;
+            let myUsername = document.getElementsByName('my-username')[0];
+            
+            if (isDefined(sessionStorage.userToken)) {
+                pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
+                myUsername.innerHTML = `${sessionStorage.username} `;
+                myUsername.href = `/profile?token=${sessionStorage.userToken}`;
+                
             } else {
                 window.location.href = '/login';
             }

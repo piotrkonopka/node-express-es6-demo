@@ -31,6 +31,8 @@ input:focus:invalid {
     font-size: 95%;
     margin: 0;
     padding: 0; }
+  .panel-link .edit-profile-btn {
+    visibility: hidden; }
 
 .loginbox {
   margin-top: 50px; }

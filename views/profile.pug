@@ -7,7 +7,7 @@ block content
                 .panel-heading 
                     .panel-title User profile 
                     .panel-link
-                        input.btn.btn-link(type="button", value="Edit", onclick="editProfile()")
+                        input.edit-profile-btn.btn.btn-link(type="button", name="edit-profile-btn" ,value="Edit", onclick="editProfile()")
                         
                 .panel-body
                     .center-block
@@ -22,4 +22,6 @@ block content
                         dd#userBio
 
 block scripts
+    script.
+        let _userData = !{JSON.stringify(userData)}
     script(src="/javascripts/script.js", type="text/javascript")

@@ -33,17 +33,18 @@ class Chat {
     
     updateChatbox(response) {
         let messages = document.getElementById('messages');
+        let profileLink = `/profile?token=${sessionStorage.userToken}&username=${response.user.username}`;
 
         let content = `
             <div class="media-left">
-                <a href="">
+                <a href="${profileLink}">
                     <img class="media-object img-circle" src="${response.user.avatar}" alt="Avatar">
                 </a>
             </div>
             <div class="media-body clearfix">
                 <div class="media-heading">
                     <div class="pull-left">
-                        <a href="">
+                        <a href="${profileLink}">
                             ${response.user.username}
                         </a>
                     </div>

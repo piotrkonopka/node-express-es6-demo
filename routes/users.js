@@ -50,7 +50,18 @@ router.get('/signup', recaptcha.middleware.render, (req, res, next) => {
 });
 
 router.get('/profile', auth.required, (req, res, next) => {
-    return res.render('profile');
+    let username = req.query.username || '';
+    
+    User.findOne({username: username}).then((user) => {
+        let userData = {};
+        
+        if(user) {
+            userData = user.toAuthJSON();
+        }
+        
+        return res.render('profile', { userData });
+        
+    });
 });
 
 router.get('/profile/edit', auth.required, (req, res, next) => {
