@@ -64,7 +64,7 @@ class Chat {
         messages.appendChild(newMessage);
 
         let chatBox = document.getElementsByClassName('chat-box')[0];
-        chatBox.scrollTop = chatBox.scrollHeigh;
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     updateUsersCounter(data) {
