@@ -63,6 +63,15 @@ class UserClass {
             image: this.image
         };
     }
+    
+    toPublicJSON() {
+        return {
+            username: this.username,
+            email: this.email,
+            bio: this.bio,
+            image: this.image
+        };
+    }
 }
 
 UserSchema.loadClass(UserClass);

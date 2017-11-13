@@ -56,7 +56,7 @@ router.get('/profile', auth.required, (req, res, next) => {
         let userData = {};
         
         if(user) {
-            userData = user.toAuthJSON();
+            userData = user.toPublicJSON();
         }
         
         return res.render('profile', { userData });
