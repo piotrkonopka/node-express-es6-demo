@@ -10,7 +10,7 @@ class Chat {
         this.socket.on('new message', this.addMessage.bind(this));
         this.socket.on('user joined', this.updateUsersCounter.bind(this));
         this.socket.on('user left', this.updateUsersCounter.bind(this));
-        this.socket.on('login', this.updateUsersCounter.bind(this));
+        this.socket.on('login', this.login.bind(this));
 
         this.messages.push = (response) => {
             Array.prototype.push.apply(this.messages, [response]);
@@ -75,6 +75,17 @@ class Chat {
             <span class="glyphicon glyphicon-user"></span> 
             ${this.loggedUsers} user(s)
         `;
+    }
+    
+    login(data) {
+        this.updateUsersCounter(data);
+        
+        if(isDefined(data.chatHistory)) {
+            let length = data.chatHistory.length;
+            for(let i = 0; i < length; i++) {
+                this.updateChatbox(data.chatHistory[i]);
+            }
+        }
     }
 
     addMessage(data) {
