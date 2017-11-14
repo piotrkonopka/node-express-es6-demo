@@ -15,11 +15,10 @@ block content
                     ul#messages.media-list
 
                 .panel-footer
-                    form(action="")
-                        .form-group.input-group
-                            input#input.form-control(type="text", placeholder="Type something...", maxlength="256")
-                            .input-group-btn
-                                input#send.btn.btn-success(type="button", value="Send", onclick="chat.sendMessage()")
+                    form#form.form-group.input-group
+                        input#input.form-control(type="text", autofocus, autocomplete="off", placeholder="Type something...", maxlength="256")
+                        .input-group-btn
+                            input#send.btn.btn-success(type="button", value="Send", onclick="chat.sendMessage()")
 
 block scripts
     script(src="/javascripts/script.js", type="text/javascript")

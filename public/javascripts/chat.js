@@ -17,8 +17,30 @@ class Chat {
             this.updateChatbox(response);
         };
 
+        this.noSubmiting();
+        this.bindEnterKeyWithSendBtn();
         this.loadUserData();
         this.joinChat();
+    }
+    
+    noSubmiting() {
+        document.getElementById('form')
+            .addEventListener('submit', (event) => {
+                event.preventDefault();
+            });
+    }
+    
+    bindEnterKeyWithSendBtn() {
+        let ENTER_KEY_CODE = 13;
+        
+        document.getElementById('input')
+            .addEventListener('keyup', (event) => {
+                event.preventDefault();
+        
+                if (event.keyCode === ENTER_KEY_CODE) {
+                    document.getElementById('send').click();
+                }
+            });
     }
     
     loadUserData() {
