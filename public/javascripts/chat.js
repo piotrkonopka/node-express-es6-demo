@@ -1,5 +1,8 @@
-class Chat {
+class Chat extends UserInterface {
     constructor() {
+        super();
+        super.loadNavigationBarData();
+        
         this.messages = [];
         this.loggedUsers = 0;
         this.newMessage = '';
@@ -46,7 +49,7 @@ class Chat {
     loadUserData() {
         this.username = sessionStorage.username;
         
-        if (isDefined(sessionStorage.userImage)) {
+        if (this.isDefined(sessionStorage.userImage)) {
             this.avatarSrc = `../images/uploads/${sessionStorage.userImage}`;
         } else {
             this.avatarSrc = '../images/Default-avatar.jpg';
@@ -102,7 +105,7 @@ class Chat {
     login(data) {
         this.updateUsersCounter(data);
         
-        if(isDefined(data.chatHistory)) {
+        if(this.isDefined(data.chatHistory)) {
             let length = data.chatHistory.length;
             for(let i = 0; i < length; i++) {
                 this.updateChatbox(data.chatHistory[i]);

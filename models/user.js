@@ -22,7 +22,10 @@ const UserSchema = new mongoose.Schema({
         match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'is invalid'],
         index: true
     },
-    bio: String,
+    bio: {
+        type: String,
+        match: [/^.{0,256}$/, 'is invalid']
+    },
     image: String,
     hash: String,
     salt: String,

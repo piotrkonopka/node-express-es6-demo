@@ -24,11 +24,10 @@ input:focus:invalid {
 
 .panel-link {
   float: right;
-  font-size: 80%;
+  font-size: .785em;
   position: relative;
   top: -12px; }
   .panel-link input {
-    font-size: 95%;
     margin: 0;
     padding: 0; }
   .panel-link .edit-profile-btn {

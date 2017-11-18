@@ -34,14 +34,15 @@ block content
                         .form-group
                             .col-sm-offset-2.col-sm-10
                                 .pull-left
-                                    input.btn.btn-success(type="submit", value="Save", onclick="postUserData()")
+                                    input.btn.btn-success(type="submit", value="Save", onclick="profileEdit.postUserData()")
                                 .pull-right
-                                    input.btn.btn-default.btn-sm(type="button", value="Reset", onclick="resetForm()")
-                                    input.btn.btn-default.btn-sm(type="button", value="Cancel", onclick="cancelEdit()")
+                                    input.btn.btn-default.btn-sm(type="button", value="Reset", onclick="profileEdit.resetForm()")
+                                    input.btn.btn-default.btn-sm(type="button", value="Cancel", onclick="profileEdit.cancelEdit()")
 
                     hr
                     .pull-right
-                        input.btn.btn-danger.btn-sm(type="button", value="Delete account", onclick="delUser()")
+                        input.btn.btn-danger.btn-sm(type="button", value="Delete account", onclick="profileEdit.delUser()")
 
 block scripts
-    script(src="/javascripts/script.js", type="text/javascript")
+    script(src="/javascripts/user-interface.js", type="text/javascript")
+    script(src="/javascripts/profile-edit.js", type="text/javascript")

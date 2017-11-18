@@ -7,7 +7,7 @@ html
     link(rel="stylesheet", href="/styles/css/bootstrap.min.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
 
-  body(onload="loadData()")
+  body
     nav.navbar.navbar-default
         .container-fluid
             p.navbar-brand(name="page-title")
@@ -19,7 +19,7 @@ html
             p.navbar-text.navbar-right Logged as 
                 a.navbar-link(href="", name="my-username")
                 span |
-                input.btn-link(type="button", value="Logout", onclick="logout()")
+                input.btn-link(type="button", value="Logout", onclick="ui.logout()")
 
     .container
         block content

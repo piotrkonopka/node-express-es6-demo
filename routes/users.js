@@ -29,6 +29,7 @@ const router = require('express').Router(),
                 
     returnError = require('../config').returnError,
     logout = require('../config').logout,
+    validatePassword = require('../config').validatePassword,
     auth = require('../config/auth'),
     mailer = require('../config/mailer'),
     
@@ -97,11 +98,15 @@ router.put('/user', auth.required, upload.single('avatar'), (req, res, next) => 
             user.image = req.file.filename;
         }
         if (typeof req.body.password !== 'undefined') {
-            user.setPassword(req.body.password);
+            if(validatePassword(req.body.password)) {
+                user.setPassword(req.body.password);
+            } else {
+                return returnError(res, 'password', 'is invalid');
+            }
         }
 
         return user.save().then(() => {
-            return res.json({user: user.toAuthJSON()});
+            return res.json({user: user.toAuthJSON(), redirectTo: '/profile'});
         });
     }).catch(next);
 });
@@ -161,7 +166,12 @@ router.post('/user/signup',
 
     user.username = req.body.username;
     user.email = req.body.email;
-    user.setPassword(req.body.password);
+    
+    if(validatePassword(req.body.password)) {
+        user.setPassword(req.body.password);
+    } else {
+        return returnError(res, 'password', 'is invalid');
+    }
 
     return user.save().then(() => {
         return res.json({user: user.toAuthJSON()});
@@ -239,7 +249,12 @@ router.put('/user/reset/password/:hash/:username', upload.fields([{name: 'passwo
     User.findOne({resethash: req.params.hash, username: req.params.username}).then((user) => {
         if(user) {
             user.resethash = undefined;
-            user.setPassword(req.body.password);
+            
+            if(validatePassword(req.body.password)) {
+                user.setPassword(req.body.password);
+            } else {
+                return returnError(res, 'password', 'is invalid');
+            }
                     
             return user.save().then(() => {
                 return res.json({messages: {success: 'password was successfully changed'}});

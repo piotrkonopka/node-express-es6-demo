@@ -17,7 +17,7 @@ block content
                                 required, pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
                         .form-group
-                            input.btn.btn-success.btn-block(type="submit", value="Send", onclick="sendResetPasswordRequest()")
+                            input.btn.btn-success.btn-block(type="submit", value="Send", onclick="loginHelp.sendResetPasswordRequest()")
                     
                     hr
                     p   Go back to 
@@ -25,4 +25,5 @@ block content
 
 
 block scripts
-    script(src="/javascripts/script.js", type="text/javascript")
+    script(src="/javascripts/user-interface.js", type="text/javascript")
+    script(src="/javascripts/login-help.js", type="text/javascript")
