@@ -3,6 +3,7 @@ const router = require('express').Router(),
     passport = require('passport'),
     User = mongoose.model('User'),
     crypto = require('crypto'),
+    xssFilters = require('xss-filters'),
     
     multer = require('multer'),
     storage = multer.diskStorage({
@@ -92,7 +93,7 @@ router.put('/user', auth.required, upload.single('avatar'), (req, res, next) => 
             user.email = req.body.email;
         }
         if (typeof req.body.bio !== 'undefined') {
-            user.bio = req.body.bio;
+            user.bio = xssFilters.inHTMLData(req.body.bio);
         }
         if (typeof req.file !== 'undefined') {
             user.image = req.file.filename;

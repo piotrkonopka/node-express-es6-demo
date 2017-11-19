@@ -21,6 +21,7 @@ block content
                             input#send.btn.btn-success(type="button", value="Send", onclick="chat.sendMessage()")
 
 block scripts
+    script(src="/xss-filters/xss-filters.min.js", type="text/javascript")
     script(src="/javascripts/user-interface.js", type="text/javascript")
     script(src="/socket.io-client/socket.io.js", type="text/javascript")
     script(src="/javascripts/chat.js", type="text/javascript")

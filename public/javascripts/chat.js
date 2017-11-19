@@ -77,7 +77,7 @@ class Chat extends UserInterface {
                         <span class="glyphicon glyphicon-time"></span> ${response.date}
                     </div>
                 </div>
-                <p>${response.message}</p>
+                <p>${ xssFilters.inHTMLData(response.message) }</p>
             </div>
             <hr />
         `;

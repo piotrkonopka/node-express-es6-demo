@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/styles', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use('/socket.io-client', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
 app.use('/socket.io', express.static(__dirname + '/node_modules/socket.io/lib/'));
+app.use('/xss-filters', express.static(__dirname + '/node_modules/xss-filters/dist/'));
 
 app.use(session({
     secret: secret,

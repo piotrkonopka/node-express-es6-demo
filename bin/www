@@ -54,7 +54,8 @@ app.set('port', port);
 
 const server = http.createServer(app),
     io = require('socket.io').listen(server),
-    messagesHistory = require('./libs/messages-history');
+    messagesHistory = require('./libs/messages-history'),
+    xssFilters = require('xss-filters');
 
 let loggedUsers = 0;
 let chatHistory = new messagesHistory(20);
@@ -76,7 +77,7 @@ io.on('connection', (socket) => {
     socket.on('new message', (data) => {
         let message = {
             user: { username: socket.username, avatar: data.avatar },
-            message: data.message,
+            message: xssFilters.inHTMLData(data.message),
             date: new Date().toUTCString()
         };
         

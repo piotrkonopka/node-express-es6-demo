@@ -22,9 +22,11 @@ class Profile extends UserInterface {
 
             if(this.isDefined(sessionStorage.userToken)) {
                 if(this.isDefined(_userData.username)) {
+                    let bio = _userData.bio || 'Unknown...';
+                    
                     username.innerHTML = _userData.username;
                     userEmail.innerHTML = _userData.email;
-                    userBio.innerHTML = _userData.bio || '>>Top Secret<<';
+                    userBio.innerHTML = xssFilters.inHTMLData( bio );
                     userImage.src = _userData.image 
                         ? `../images/uploads/${_userData.image}`
                         : '../images/Default-avatar.jpg';
@@ -34,9 +36,11 @@ class Profile extends UserInterface {
                     }
 
                 } else {
+                    let bio = sessionStorage.userBio || 'Unknown...';
+                    
                     username.innerHTML = sessionStorage.username;
                     userEmail.innerHTML = sessionStorage.userEmail;
-                    userBio.innerHTML = sessionStorage.userBio || '>>Top Secret<<';
+                    userBio.innerHTML = xssFilters.inHTMLData( bio );
                     userImage.src = sessionStorage.userImage 
                         ? `../images/uploads/${sessionStorage.userImage}`
                         : '../images/Default-avatar.jpg';
