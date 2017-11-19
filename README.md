@@ -9,7 +9,7 @@ Task 2: Profile edit page, uploading avatar's image, deleting account - done
 Task 3: Recaptcha verification on sign up - done  
 Task 4: Password reset feature with Nodemailer support - done  
 Task 5: Socket.io chat widget - done  
-Task 6: XSS filters  
+Task 6: XSS filters - done  
 ...  
 
 # Getting started
@@ -39,6 +39,8 @@ To get the server running locally:
 - [node-sass-middleware](https://github.com/sass/node-sass-middleware) - Middleware for SASS
 - [pug](https://github.com/pugjs/pug) - Template engine for building views
 - [bootstrap](https://github.com/twbs/bootstrap) - Base for custom frontend styling
+- [socket.io](https://github.com/socketio/socket.io) - Real-time bidirectional event-based communication
+- [xss-filters](https://github.com/yahoo/xss-filters) - Server & client side output filtering to prevent XSS
 
 ## Application Structure
 
