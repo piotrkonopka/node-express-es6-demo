@@ -5,29 +5,30 @@ block content
         .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
             .panel.panel-info
                 .panel-heading 
-                    .panel-title Change your personal data
+                    .panel-title
+                        span(name="panel-title")
                     
                 .panel-body
                     form.form-horizontal(action="/user", method="put", name="user", enctype="multipart/form-data")
                         .alert.alert-danger.col-sm-12
                         
                         .form-group
-                            label.col-sm-2.control-label(for="email") Email
+                            label.col-sm-2.control-label(for="email", name="email-label")
                             .col-sm-10
                                 input.form-control(type="email", name="email", placeholder="Email", pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                                 
                         .form-group
-                            label.col-sm-2.control-label(for="password") Password
+                            label.col-sm-2.control-label(for="password", name="password-label")
                             .col-sm-10
                                 input.form-control(type="password", name="password", placeholder="Password", pattern="^[a-zA-Z0-9.!]{5,20}$")
              
                         .form-group
-                            label.col-sm-2.control-label(for="avatar") Avatar
+                            label.col-sm-2.control-label(for="avatar", name="avatar-label")
                             .col-sm-10
                                 input.form-control(type="file", name="avatar", accept="image/*")
                                 
                         .form-group
-                            label.col-sm-2.control-label(for="bio") Bio
+                            label.col-sm-2.control-label(for="bio", name="bio-label")
                             .col-sm-10
                                 textarea.form-control(type="text", name="bio", rows="5", placeholder="Bio", maxlength="256")
                         

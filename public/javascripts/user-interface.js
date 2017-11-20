@@ -2,6 +2,24 @@ class UserInterface {
     constructor() {
         this.validAvatar = false;
         this.uploadedAvatar = null;
+        this.labels = [];
+        this.navBarLinks = {
+            chat: {
+                label: 'Chat',
+                href: '/chat'
+            },
+            profile: {
+                label: 'Logged as ',
+                href: '/profile'
+            }
+        };
+    }
+    
+    loadLabels() {
+        this.labels.map((label) => {
+            let element = document.getElementsByName(label.name)[0];
+            element.innerText = label.innerText;
+        });
     }
     
     isDefined(target) {
@@ -216,13 +234,16 @@ class UserInterface {
         if(this.isDefined(Storage)) {
             let pageTitle = document.getElementsByName('page-title')[0];
             let myUsername = document.getElementsByName('my-username')[0];
+            let myUsernameLabel = document.getElementsByName('my-username-label')[0];
             let chatLink = document.getElementsByName('chat-link')[0];
 
             if (this.isDefined(sessionStorage.userToken)) {
                 pageTitle.innerHTML = window.location.pathname.slice(1).replace('/', ' | ');
-                chatLink.href = `/chat?token=${sessionStorage.userToken}`;
+                chatLink.href = `${this.navBarLinks.chat.href}?token=${sessionStorage.userToken}`;
+                chatLink.text = this.navBarLinks.chat.label;
                 myUsername.innerHTML = `${sessionStorage.username} `;
-                myUsername.href = `/profile?token=${sessionStorage.userToken}`;
+                myUsername.href = `${this.navBarLinks.profile.href}?token=${sessionStorage.userToken}`;
+                myUsernameLabel.innerText = this.navBarLinks.profile.label;
 
             } else {
                 window.location.href = '/login';

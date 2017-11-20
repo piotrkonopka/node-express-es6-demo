@@ -2,6 +2,13 @@ class Profile extends UserInterface {
     constructor() {
         super();
         super.loadNavigationBarData();
+        super.labels = [
+            { innerText: 'User profile',    name: 'panel-title' },
+            { innerText: 'Email',           name: 'email-section' },
+            { innerText: 'Bio',             name: 'bio-section' }
+        ];
+        super.loadLabels();
+        
         this.loadData();
     }
     

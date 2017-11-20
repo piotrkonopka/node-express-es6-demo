@@ -5,9 +5,11 @@ block content
         .loginbox.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
             .panel.panel-info
                 .panel-heading
-                    .panel-title Login
+                    .panel-title
+                        span(name="panel-title")
                     .panel-link
-                        a(href="/login-help") Forgot password?
+                        a(href="/login-help")
+                            span(name="panel-link")
                         
                 .panel-body
                     form(action="/user/login", method="post", name="user", enctype="multipart/form-data")
@@ -29,8 +31,10 @@ block content
                             input.btn.btn-success.btn-block(type="submit", value="Log In", onclick="login.postLoginData()")
                     
                     hr
-                    p   Don't have an account? 
-                        a(href="/signup") Sign Up
+                    p
+                        span(name="sign-up-paragraph")
+                        a(href="/signup")
+                            span(name="sign-up-link")
 
 
 block scripts

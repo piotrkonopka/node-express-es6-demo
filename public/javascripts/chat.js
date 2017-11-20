@@ -2,6 +2,10 @@ class Chat extends UserInterface {
     constructor() {
         super();
         super.loadNavigationBarData();
+        super.labels = [
+            { innerText: ' Chat', name: 'panel-title' }
+        ];
+        super.loadLabels();
         
         this.messages = [];
         this.loggedUsers = 0;
@@ -98,7 +102,7 @@ class Chat extends UserInterface {
         let usersCounter = document.getElementById('usersCounter');
         usersCounter.innerHTML = `
             <span class="glyphicon glyphicon-user"></span> 
-            ${this.loggedUsers} user(s)
+            ${this.loggedUsers} ${this.loggedUsers === 1 ? 'user' : 'users'}
         `;
     }
     

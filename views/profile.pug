@@ -5,7 +5,8 @@ block content
         .profile-panel.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
             .panel.panel-info
                 .panel-heading 
-                    .panel-title User profile 
+                    .panel-title
+                        span(name="panel-title")
                     .panel-link
                         input.edit-profile-btn.btn.btn-link(type="button", name="edit-profile-btn" ,value="Edit", onclick="profile.editProfile()")
                         
@@ -16,9 +17,9 @@ block content
                     hr
 
                     dl.dl-horizontal 
-                        dt Email
+                        dt(name="email-section")
                         dd#userEmail
-                        dt Bio
+                        dt(name="bio-section")
                         dd#userBio
 
 block scripts

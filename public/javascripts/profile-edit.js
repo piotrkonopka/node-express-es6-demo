@@ -3,6 +3,15 @@ class ProfileEdit extends UserInterface {
         super();
         super.noSubmitingFormName('user');
         super.loadNavigationBarData();
+        super.labels = [
+            { innerText: 'Change your personal data',  name: 'panel-title' },
+            { innerText: 'Email',                      name: 'email-label' },
+            { innerText: 'Password',                   name: 'password-label' },
+            { innerText: 'Avatar',                     name: 'avatar-label' },
+            { innerText: 'Bio',                        name: 'bio-label' }
+        ];
+        super.loadLabels();
+        
         this.loadData();
         
         this.MAX_AVATAR_SIZE = 10240,
